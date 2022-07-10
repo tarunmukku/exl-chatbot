@@ -1,0 +1,71 @@
+version: "3.1"
+
+slots:
+  VINnumber:
+    type : bool
+    influence_conversation: false
+    mappings:
+    - type: custom
+
+
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - query_vin
+  - query_vin_location
+  - query_antitheft
+  - query_antilock
+  - query_get_recommendations
+  - nlu_fallback
+
+actions:
+  - action_set_vin
+  - action_get_recommendations
+  - action_intent_question
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+  - text: "Hey!"
+  - text: "Hi!"
+
+  utter_vin:
+  - text: "A vehicle identification number (VIN) (also called a chassis number or frame number) is a unique code, including a serial number, used by the automotive industry to identify individual motor vehicles." 
+
+  utter_vin_location:
+  - text: "VIN can be found at:"
+    image: "https://s0.hfdstatic.com/sites/the_hartford/pubimgs/1444705295482.jpg"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  - text: "Hope this will make your day better :)"
+    image: "https://i.ytimg.com/vi/ByH9LuSILxU/maxresdefault.jpg"  
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_antitheft:
+  - text: "Antitheft Device — a device in a car that reduces the chance that the vehicle will be stolen or vandalized or increases the chance of recovering a stolen car."
+
+  utter_antilock:
+  - text: "ABS or an Anti-Lock Braking System is a piece of safety equipment that prevents the wheels of a vehicle from locking up under emergency, panic, or harsh braking conditions."
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

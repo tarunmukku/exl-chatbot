@@ -1,0 +1,55 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: answer VIN number
+  steps:
+  - intent: query_vin
+  - action: utter_vin
+
+- story: answer VIN location 
+  steps:
+  - intent: query_vin_location
+  - action: utter_vin_location
+
+- story: answer anti-lock system
+  steps:
+  - intent: query_antilock
+  - action: utter_antilock
+
+- story: answer anti-theft system
+  steps:
+  - intent: query_antitheft
+  - action: utter_antitheft
+
+- story: get recommendations
+  steps:
+  - intent: query_get_recommendations
+  - action: action_get_recommendations     
