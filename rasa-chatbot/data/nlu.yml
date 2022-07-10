@@ -1,0 +1,141 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - Hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - na
+    - nope
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: query_vin
+  examples: |
+    -	what is VIN number
+    - what is VIN number?
+    - VIN
+    - Vehicle Identification number?
+    - what is car vehicle number?
+    - car number?
+
+- intent: query_vin_location
+  examples: |
+    - where is VIN number?
+    - how to find VIN
+    - identify VIN number
+    - find vehicle number
+    - find car number?
+    - where to find VIN number
+    - how can i find Vehicle Identification number?
+    - where is car vehicle number displayed?
+    - car number location?
+
+- intent: query_antitheft
+  examples: |
+    - what is anti theft system
+    - what is anti theft feature
+    - define anti theft system
+    - tell me about anti theft system
+    - what is anti-theft device?
+
+- intent: query_antilock
+  examples: |
+    - what is anti lock system
+    - what is anti lock feature
+    - define anti lock system
+    - tell me about anti lock system
+    - what is anti-lock device?
+    - what is abs
+    - explain abs
+- intent: query_get_recommendations
+  examples: |
+    - here are my application details
+    - subbmitted form
+    - here is my application number
+    - below are my application details
+    - application submitted
+
