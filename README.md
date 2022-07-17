@@ -12,6 +12,8 @@ to initialise actions server. to check if server is up check 'http://localhost:5
 REACT web application (https://github.com/tarunmukku/exl-hackathon-web-form.git) : 
 In 'exl-chatbot\react-insurance-form\web-form' folder in the command terminal run 'npm run start' 
 to initialize front end in on http://localhost:3000/. the web application would be up and running. Enable CROS if chatbot UI is not showing up or use CROS ON extenstion in chrome like https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc
+
+
 Haystack - FASTAPI server (Optional):
 https://github.com/tarunmukku/HayStack-NLP-DPR-fastapi.git
 
