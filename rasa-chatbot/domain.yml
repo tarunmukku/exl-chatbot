@@ -58,7 +58,8 @@ responses:
   - text: "Antitheft Device — a device in a car that reduces the chance that the vehicle will be stolen or vandalized or increases the chance of recovering a stolen car."
 
   utter_antilock:
-  - text: "ABS or an Anti-Lock Braking System is a piece of safety equipment that prevents the wheels of a vehicle from locking up under emergency, panic, or harsh braking conditions."
+   - text: "Here is the explination of what Antilock braking system is:"
+     attachment: { "type":"video", "payload":{ "src": "https://youtube.com/embed/98DXe3uKwfc" } }
 
   utter_goodbye:
   - text: "Bye"

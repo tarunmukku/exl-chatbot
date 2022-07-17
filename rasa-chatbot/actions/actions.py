@@ -14,10 +14,40 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 import requests
-from sqlalchemy import true
+from haystack.nodes import FARMReader, TransformersReader
+from haystack.document_stores import OpenSearchDocumentStore
+from haystack.nodes import DensePassageRetriever
+from haystack.nodes import BM25Retriever
+from haystack.pipelines import ExtractiveQAPipeline
 
+
+url = "search-auto-insurance-nbdvjfxbsyudd5yhpq3e4ic6bu.ap-south-1.es.amazonaws.com"
+username = "tarunm"
+password = "May#2022password"
+
+document_store = OpenSearchDocumentStore(host=url,port=443, username=username, password=password, index="auto-insurance")
+#retriever = BM25Retriever(document_store=document_store)
+
+retriever = DensePassageRetriever(
+    document_store=document_store,
+    query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
+    passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base",
+    max_seq_len_query=64,
+    max_seq_len_passage=256,
+    batch_size=16,
+    use_gpu=True,
+    embed_title=True,
+    use_fast_tokenizers=True,
+)
+
+reader =FARMReader(model_name_or_path="deepset/roberta-base-squad2", use_gpu=True)
+#reader = FARMReader(model_name_or_path="deepset/tinyroberta-squad2", use_gpu=False)
+
+pipe = ExtractiveQAPipeline(reader=reader, retriever=retriever)
+    
 
 class ActionHelloWorld(Action):
+
 
     def name(self) -> Text:
         return "action_set_vin"
@@ -118,18 +148,42 @@ class ActionShowCarsousel(Action):
 
 
 class ActionHelloWorld(Action):
+   
     def name(self) -> Text:
         return "action_intent_question"
 
     def run(self, dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global pipe
         message = tracker.latest_message.get('text')
-        url = "http://127.0.0.1:8000/query"
-        data = {'query': message}
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        response = requests.post(url, data=json.dumps(data), headers=headers)
+        result = pipe.run(query=message)
         
-        dispatcher.utter_message(text=response[0])
-        dispatcher.utter_message(text=response[1])
+        dispatcher.utter_message(text=result['answers'][0].answer)
+
         return []            
+
+class ActionHaystack(Action):
+
+    def name(self) -> Text:
+        return "call_haystack"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        url = "http://localhost:8000/query"
+        payload = {"query": str(tracker.latest_message["text"])}
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        response = requests.request("POST", url, headers=headers, json=payload).json()
+
+        if response["answers"]:
+            answer = response["answers"][0]["answer"]
+        else:
+            answer = "No Answer Found!"
+
+        dispatcher.utter_message(text=answer)
+
+        return []
